@@ -39,7 +39,7 @@ pipeline{
 				echo 'Transfer to docker machine'
 				sshagent(['tomcat']) {
 					sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.47.189 docker container rm -f myweb'
-					sh "ssh ec2-user@172.31.47.189 docker container run -itd -p 8080:8080 amiyaranjansahoo/image1:${env.BUILD_NUMBER}  --name myweb"
+					sh "ssh ec2-user@172.31.47.189 docker  container run -itd -p 8080:8080  --name myweb amiyaranjansahoo/image1:10"
 				}
 				
 			}
