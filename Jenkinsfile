@@ -30,7 +30,7 @@ pipeline{
 				echo 'Docker login and push'
 				withCredentials([string(credentialsId: 'dockerhubpswd', variable: 'dockerhbpwd')]) {
 					sh 'docker login -u amiyaranjansahoo -p {dockerhbpwd}'
-					sh 'docker push amiyaranjansahoo/image1:${CommitID}
+					sh 'docker push amiyaranjansahoo/image1:${CommitID}'
 				}
 			}
 		}
