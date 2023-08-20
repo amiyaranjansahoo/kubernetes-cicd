@@ -27,7 +27,7 @@ pipeline{
 				echo 'stage3'
 				echo 'Docker login and push'
 				withCredentials([string(credentialsId: 'dockerhubpswd', variable: 'dockerhbpwd')]) {
-					sh "docker login -u amiyaranjansahoo -p {dockerhbpwd}"
+					sh "docker login -u amiyaranjansahoo -p ${dockerhbpwd}"
 					sh "docker push amiyaranjansahoo/image1:${env.BUILD_NUMBER}"
 				}
 			}
