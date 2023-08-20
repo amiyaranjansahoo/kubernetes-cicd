@@ -20,7 +20,7 @@ pipeline{
 			steps{
 				echo 'stage2'
 				echo 'Docker build'
-				sh 'docker build . -t amiyaranjansahoo/image1:${CommitID}'
+				sh 'docker build . -t amiyaranjansahoo/image1:${env.BUILD_NUMBER}'
 			}
 		}
 		
@@ -30,7 +30,7 @@ pipeline{
 				echo 'Docker login and push'
 				withCredentials([string(credentialsId: 'dockerhubpswd', variable: 'dockerhbpwd')]) {
 					sh 'docker login -u amiyaranjansahoo -p {dockerhbpwd}'
-					sh 'docker push amiyaranjansahoo/image1:${CommitID}'
+					sh 'docker push amiyaranjansahoo/image1:${env.BUILD_NUMBER}'
 				}
 			}
 		}
@@ -41,15 +41,11 @@ pipeline{
 				echo 'Transfer to docker machine'
 				sshagent(['tomcat']) {
 					sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.47.189 docker container rm -f myweb'
-					sh 'ssh ec2-user@172.31.47.189 docker container run -itd amiyaranjansahoo/image1:${CommitID} -p 8080:8080 --name myweb'
+					sh 'ssh ec2-user@172.31.47.189 docker container run -itd amiyaranjansahoo/image1:${env.BUILD_NUMBER} -p 8080:8080 --name myweb'
 				}
 				
 			}
 		}
 	}
 	
-	def latestCommitID(){
-	def CommitID=sh returnStdout: true, script: 'git rev-parse HEAD'
-	return CommitID
-} 
 }
