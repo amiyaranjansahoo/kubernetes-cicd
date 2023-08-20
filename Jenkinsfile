@@ -47,7 +47,7 @@ pipeline{
 		sshagent(['minikube']) {
     			sh "scp -o StrictHostKeyChecking=no node-app-pod.yaml services.yaml ubuntu@172.31.33.103:/home/ubuntu"
 	  		script{
-				sh "ssh ubuntu@172.31.33.103 kubectl apply -f ."
+				sh "ssh ubuntu@172.31.33.103 sudo kubectl apply -f ."
 			}
 		}
         }
