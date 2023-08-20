@@ -35,7 +35,7 @@ pipeline{
 		
 		stage('Permission change'){
 			steps{
-          sh "chmod +x modifyTag.sh"
+          sh "chmod +x ./modifyTag.sh"
           sh "./modifyTag.sh ${env.BUILD_NUMBER}"
         
 			}
