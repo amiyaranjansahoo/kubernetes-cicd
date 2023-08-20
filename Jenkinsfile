@@ -49,7 +49,7 @@ pipeline{
 	}
 	
 	def latestCommitID() {
-	def latestCommitID=sh returnStdout: true, script: 'git rev-parse HEAD'
-	return latestCommitID
+	def CommitID=sh returnStdout: true, script: 'git rev-parse HEAD'
+	return CommitID
 } 
 }
