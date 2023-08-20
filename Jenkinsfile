@@ -3,9 +3,7 @@ pipeline{
 	tools {
 		maven 'mvn3'
 	}
-	environment {
-		CommitID=latestCommitID()
-	}
+	
 
 	stages{
 		stage('build using maven'){
