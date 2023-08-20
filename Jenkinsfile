@@ -44,7 +44,7 @@ pipeline{
     stage('Deploy to k8s'){
 			steps{
         sshagent(['minikube']) {
-          sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.35.170 kubectl apply -f node-app-pod.yml services.yml"
+          sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.35.170 kubectl apply -f node-app-pod.yaml services.yaml"
         }
         
 			}
